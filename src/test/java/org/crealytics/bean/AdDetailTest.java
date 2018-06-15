@@ -20,14 +20,8 @@ public class AdDetailTest {
     }
     @Test
     public void fullBuild() {
+        //parameterized constructor calls the full build
         AdDetail ad = new AdDetail("desktop web",100L,1000L,12L,2L,100.0f,1);
-        assertThat(ad)
-                .isNotNull()
-                .hasFieldOrPropertyWithValue("id",null)
-                .hasFieldOrPropertyWithValue("cr",null)
-                .hasFieldOrPropertyWithValue("ctr",null);
-
-        ad.fullBuild();
         assertThat(ad)
                 .hasFieldOrPropertyWithValue("cr",0.2f)
                 .hasFieldOrPropertyWithValue("ctr",1.2f)

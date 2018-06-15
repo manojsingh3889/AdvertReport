@@ -1,12 +1,10 @@
 package org.crealytics.service;
 
-import org.apache.juli.logging.LogFactory;
 import org.crealytics.bean.AdDetail;
 import org.crealytics.repository.AdRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,7 +36,7 @@ public class AdServiceImpl implements AdService{
      * @return persisted version of records
      */
     public List<AdDetail> insertAll(List<AdDetail> adDetails){
-        LOGGER.info("inserting single multiple AdDetails");
+        LOGGER.info("inserting multiple AdDetails");
         LOGGER.debug(adDetails.toString());
         return repository.saveAll(adDetails);
     }

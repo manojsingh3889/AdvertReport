@@ -1,5 +1,6 @@
 package org.crealytics.bean;
 
+import org.crealytics.utility.CSVProperty;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
@@ -52,6 +53,7 @@ public class AdDetail {
     private Long impressions;
     private Long clicks;
     private Long conversions;
+    @CSVProperty("revenue (USD)")
     private Float revenue;
     private Integer month;
 

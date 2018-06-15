@@ -67,24 +67,27 @@ public class AdRepositoryTest {
     @Test
     public void test_findByMonthAndSite(){
         List<AdDetail> list = new ArrayList<>();
-        list.add(new AdDetail("desktop web",100L,1000L,12L,2L,100.0f,1));
-        list.add(new AdDetail("andriod",120L,1001L,13L,11L,100.1f,1));
-        list.add(new AdDetail("iOS",100L,1000L,12L,2L,100.0f,3));
-        list.add(new AdDetail("desktop web",120L,1001L,13L,11L,100.1f,1));
-        list.add(new AdDetail("mobile web",100L,1000L,12L,2L,100.0f,2));
-        list.add(new AdDetail("desktop web",120L,1001L,13L,11L,100.1f,2));
+        list.add(new AdDetail("desktop web",100L,1000L,12L,2L,100.0f,11));
+        list.add(new AdDetail("andriod",120L,1001L,13L,11L,100.1f,11));
+        list.add(new AdDetail("iOS",100L,1000L,12L,2L,100.0f,10));
+        list.add(new AdDetail("desktop web",120L,1001L,13L,11L,100.1f,11));
+        list.add(new AdDetail("mobile web",100L,1000L,12L,2L,100.0f,12));
+        list.add(new AdDetail("desktop web",120L,1001L,13L,11L,100.1f,12));
 
         //insert all
         repository.saveAll(list);
 
         //verify -1
-        List<AdDetail> found = repository.findByMonthAndSite(1,"desktop web");
+        List<AdDetail> found = repository.findByMonthAndSite(11,"desktop web");
         assertNotNull(found);
-        assertEquals(found,list.stream().filter(adDetail -> adDetail.getMonth()==1 && adDetail.getSite().equals("desktop web")).collect(Collectors.toList()));
+        assertEquals(found,list.stream().filter(adDetail -> adDetail.getMonth()==11 && adDetail.getSite().equals("desktop web")).collect(Collectors.toList()));
         //verify -2
-        found = repository.findByMonthAndSite(3,"iOS");
+        found = repository.findByMonthAndSite(10,"iOS");
         assertNotNull(found);
-        assertEquals(found,list.stream().filter(adDetail -> adDetail.getMonth()==3 && adDetail.getSite().equals("iOS")).collect(Collectors.toList()));
+        assertEquals(found,list.stream().filter(adDetail -> adDetail.getMonth()==10 && adDetail.getSite().equals("iOS")).collect(Collectors.toList()));
+
+        //delete
+        repository.deleteAll(list);
     }
 
 
