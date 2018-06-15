@@ -11,7 +11,7 @@ import java.util.Objects;
  * This is ORM entity which will be represented as ad_detail relational entity in DB.
  * <p>
  * Ad detail contains several parameter which can help viewer to determine month and site
- * wise report for advert bussiness
+ * wise report for advert bossiness
  *
  * Data member:
  * <blockquote><pre>

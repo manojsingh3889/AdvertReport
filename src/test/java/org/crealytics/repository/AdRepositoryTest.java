@@ -86,9 +86,36 @@ public class AdRepositoryTest {
         assertNotNull(found);
         assertEquals(found,list.stream().filter(adDetail -> adDetail.getMonth()==10 && adDetail.getSite().equals("iOS")).collect(Collectors.toList()));
 
+
         //delete
         repository.deleteAll(list);
     }
 
+    @Test
+    public void test_findByMonth(){
+        List<AdDetail> list = new ArrayList<>();
+        list.add(new AdDetail("desktop web",100L,1000L,12L,2L,100.0f,11));
+        list.add(new AdDetail("andriod",120L,1001L,13L,11L,100.1f,11));
+        list.add(new AdDetail("iOS",100L,1000L,12L,2L,100.0f,10));
+        list.add(new AdDetail("desktop web",120L,1001L,13L,11L,100.1f,11));
+        list.add(new AdDetail("mobile web",100L,1000L,12L,2L,100.0f,11));
+        list.add(new AdDetail("desktop web",120L,1001L,13L,11L,100.1f,10));
+
+        //insert all
+        repository.saveAll(list);
+
+        //verify -1
+        List<AdDetail> found = repository.findByMonth(11);
+        assertNotNull(found);
+        assertEquals(found,list.stream().filter(adDetail -> adDetail.getMonth()==11).collect(Collectors.toList()));
+        //verify -2
+        found = repository.findByMonth(10);
+        assertNotNull(found);
+        assertNotEquals(found,list.stream().filter(adDetail -> adDetail.getMonth()==10 && adDetail.getSite().equals("iOS")).collect(Collectors.toList()));
+
+
+        //delete
+        repository.deleteAll(list);
+    }
 
 }

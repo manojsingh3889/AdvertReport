@@ -18,4 +18,11 @@ public interface AdRepository extends JpaRepository<AdDetail, Long> {
      * @return list of {@link AdDetail}
      */
      List<AdDetail> findByMonthAndSite(int month, String site);
+
+    /**
+     * TO find all the Addetails matching to supplied month
+     * @param month month ordinal
+     * @return list of {@link AdDetail}
+     */
+    List<AdDetail> findByMonth(int month);
 }
