@@ -39,7 +39,7 @@ public class AdServiceTest {
         List<AdDetail> adDetails = new ArrayList<>();
         adDetails.add(new AdDetail("desktop web",100L,1000L,12L,2L,100.0f,3));
 
-        Mockito.when(repository.findByMonthAndSite(1,"desktop_web")).thenReturn(adDetails);
+        Mockito.when(repository.findByMonthAndSite(1,"desktop web")).thenReturn(adDetails);
 
         List<AdDetail> list = new ArrayList<>();
         list.add(new AdDetail("desktop web",100L,1000L,12L,2L,100.0f,1));

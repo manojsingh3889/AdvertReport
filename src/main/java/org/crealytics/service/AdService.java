@@ -29,7 +29,7 @@ public interface AdService {
      * @param month month string
      * @param site site string
      * @return send single report
-     * @throws AppException
+     * @throws AppException for bad request
      */
     AdDetailReport aggregatedReport(String month, String site) throws AppException;
 
@@ -38,7 +38,7 @@ public interface AdService {
      * @param month month string
      * @param site site string
      * @return send single report
-     * @throws AppException
+     * @throws AppException for bad request
      */
     List<AdDetailReport> report(String month, String site) throws AppException;
 }

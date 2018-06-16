@@ -79,6 +79,7 @@ public class AdDetail {
      * @param clicks total clicks
      * @param conversions total positive product purchase
      * @param revenue total revenue
+     * @param month month ordinal
      */
     public AdDetail(@NonNull String site,@NonNull Long requests,@NonNull Long impressions,
                     @NonNull Long clicks,@NonNull Long conversions,@NonNull Float revenue,

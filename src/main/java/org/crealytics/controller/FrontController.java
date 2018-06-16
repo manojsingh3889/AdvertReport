@@ -32,10 +32,10 @@ public class FrontController {
 
     /**
      * {@link #reports(String, String)} supports /api/report. This api server 2 purpose
-     * <ul>
-     *     <li> Serves as month-site detail reporter</li>
-     *     <li> Serves as month aggregator function, to access this feature client simply need to site parameter from request </li>
-     * <ul/>
+     *<ul>
+     *     <li>Serves as month-site detail reporter</li>
+     *     <li>Serves as month aggregator function, to access this feature client simply need to site parameter from request</li>
+     *</ul>
      * @param month which month detail required (mandatory)
      * @param site which site detail required (optional)
      * @return Addetail response
@@ -43,7 +43,7 @@ public class FrontController {
      */
     @RequestMapping(value = "/report", method = RequestMethod.GET)
     public ResponseEntity<AdDetailReport> reports(@RequestParam(value = "month") String month,
-                                          @RequestParam(value = "site", required = false) String site) throws AppException {
+                                                  @RequestParam(value = "site", required = false) String site) throws AppException {
 
         AdDetailReport detailReport = service.aggregatedReport(month, site);
         HttpHeaders header = new HttpHeaders();
@@ -55,11 +55,11 @@ public class FrontController {
     /**
      * {@link #reportsAsList(String, String)} } supports /api/report/list.
      * This api is similiar to {@link #reports(String, String)} only difference is it doesn't clubs the entries rather sends them as json array
-     * This api server 2 purpose
-     * <ul>
-     *     <li> Serves as month-site detail reporter</li>
-     *     <li> Serves as month aggregator function, to access this feature client simply need to site parameter from request </li>
-     * <ul/>
+     * This api server 2 purpose:
+     *<ul>
+     *     <li>Serves as month-site detail reporter</li>
+     *     <li>Serves as month aggregator function, to access this feature client simply need to site parameter from request</li>
+     *</ul>
      * @param month which month detail required (mandatory)
      * @param site which site detail required (optional)
      * @return list AdDetils
@@ -67,7 +67,7 @@ public class FrontController {
      */
     @RequestMapping(value = "/report/list", method = RequestMethod.GET)
     public ResponseEntity<List<AdDetailReport>> reportsAsList(@RequestParam(value = "month") String month,
-                                                  @RequestParam(value = "site", required = false) String site) throws AppException {
+                                                              @RequestParam(value = "site", required = false) String site) throws AppException {
 
         List<AdDetailReport> reports = service.report(month, site);
         HttpHeaders header = new HttpHeaders();

@@ -17,15 +17,26 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * {@link ParseData} is an application startup listener, which perform initial data upload into DB
+ */
 @Component
 public class ParseData implements ApplicationRunner {
 
     @Autowired
     AdService adService;
 
+    /**
+     * fetch value from spring properties stored in application.properties
+     */
     @Value("${app.csv.dir}")
     private String dirPath;
 
+    /**
+     * This method is reponsible for parsing csv in {@link #dirPath} and load them into DB.
+     * @param args startup arg injected by IOC
+     * @throws Exception upper level exception to capture all
+     */
     @Override
     public void run(ApplicationArguments args) throws Exception {
         try {
@@ -36,6 +47,11 @@ public class ParseData implements ApplicationRunner {
         }
     }
 
+    /**
+     * This method convert csv file stored at path and convert them into List of {@link AdDetail}
+     * @param path path to csv file
+     * @return List of {@link AdDetail}
+     */
     public List<AdDetail> getRecordFromFile(Path path){
         CSVReader csv = new CSVReader(path);
 
@@ -51,6 +67,13 @@ public class ParseData implements ApplicationRunner {
         return ObjectMapper.getObjects(AdDetail.class,columns,rows);
     }
 
+    /**
+     * This method convert all csv files stored at directory matching to below mentioned regex
+     * and convert them one-by-one into List of {@link AdDetail} with the help {@link #getRecordFromFile(Path)}
+     * @param dirPath path to director containing matching to 2018_[0-1][1-9]+_report.csv e.g. 2018_11_report.csv, 2018_1_report.csv
+     * @return List of {@link AdDetail}, merged result of all files
+     * @throws IOException if IO failure happens
+     */
     public List<AdDetail> getRecordFromDirectory(Path dirPath) throws IOException {
         List<AdDetail> adDetails = new ArrayList<>();
         Files.newDirectoryStream(dirPath,path -> path.getFileName().toString().matches("^2018_[0-1][1-9]+_report.csv$"))
@@ -60,6 +83,10 @@ public class ParseData implements ApplicationRunner {
         return adDetails;
     }
 
+    /**
+     * This method simple sends insert request for List of {@link AdDetail} to {@link AdService}
+     * @param list List of {@link AdDetail}
+     */
     public void insertInDatabase(List<AdDetail> list){
         adService.insertAll(list);
     }
