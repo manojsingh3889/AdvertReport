@@ -1,6 +1,6 @@
 # AdvertiseCore
 
-AdvertReport is a webservices for reporting on Ad categories.<a href="https://manojsingh3889.github.io/AdvertReport/Doc/">Javadocs</a>
+AdvertReport is a webservices for reporting on Ad categories.<a href="https://manojsingh3889.github.io/JavaDocs/AdvertReport-docs/">Javadocs</a>
 
 >## Requirement
 
