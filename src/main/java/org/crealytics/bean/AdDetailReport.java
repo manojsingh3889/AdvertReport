@@ -53,7 +53,8 @@ public class AdDetailReport {
      * @param ads original
      */
     public AdDetailReport(AdDetail ads) {
-        this.setMonth(Month.of(ads.getMonth()).toString())
+        String m = Month.of(ads.getMonth()).toString();
+        this.setMonth(m.substring(0,1)+m.substring(1).toLowerCase())
                 .setSite(ads.getSite())
                 .setRequests(ads.getRequests())
                 .setImpressions(ads.getImpressions())

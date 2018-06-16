@@ -86,7 +86,6 @@ public class AdRepositoryTest {
         assertNotNull(found);
         assertEquals(found,list.stream().filter(adDetail -> adDetail.getMonth()==10 && adDetail.getSite().equals("iOS")).collect(Collectors.toList()));
 
-
         //delete
         repository.deleteAll(list);
     }

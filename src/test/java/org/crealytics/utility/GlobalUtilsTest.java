@@ -103,7 +103,7 @@ public class GlobalUtilsTest {
     public void test_site() throws AppException {
         //check with case insensitive
         assertEquals(getSite("desktop_web"),"desktop web");
-        assertEquals(getSite("mobile web"),"mobile web");
+        assertEquals(getSite("mobile_web"),"mobile web");
     }
 
     @Test(expected = AppException.class)

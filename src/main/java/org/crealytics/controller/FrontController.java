@@ -2,6 +2,8 @@ package org.crealytics.controller;
 
 import org.crealytics.bean.AdDetailReport;
 import org.crealytics.exception.AppException;
+import org.crealytics.exception.ExceptionCode;
+import org.crealytics.exception.ExceptionMessage;
 import org.crealytics.service.AdService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,6 +46,8 @@ public class FrontController {
     @RequestMapping(value = "/report", method = RequestMethod.GET)
     public ResponseEntity<AdDetailReport> reports(@RequestParam(value = "month") String month,
                                                   @RequestParam(value = "site", required = false) String site) throws AppException {
+        if(month == null)
+            throw new AppException(ExceptionCode.INVALID_MONTH,ExceptionMessage.INVALID_MONTH);
 
         AdDetailReport detailReport = service.aggregatedReport(month, site);
         HttpHeaders header = new HttpHeaders();
@@ -68,6 +72,8 @@ public class FrontController {
     @RequestMapping(value = "/report/list", method = RequestMethod.GET)
     public ResponseEntity<List<AdDetailReport>> reportsAsList(@RequestParam(value = "month") String month,
                                                               @RequestParam(value = "site", required = false) String site) throws AppException {
+        if(month == null)
+            throw new AppException(ExceptionCode.INVALID_MONTH,ExceptionMessage.INVALID_MONTH);
 
         List<AdDetailReport> reports = service.report(month, site);
         HttpHeaders header = new HttpHeaders();

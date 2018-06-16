@@ -8,7 +8,7 @@ public class AppException extends Exception{
     private ErrorDetail detail;
 
     public AppException() {
-        detail = new ErrorDetail(ExceptionCode.INTERNAL_SERVER_EXECPTION,ExceptionMessage.INTERNAL_SERVER_EXCEPTION);
+        detail = new ErrorDetail(ExceptionCode.INTERNAL_SERVER_EXCEPTION,ExceptionMessage.INTERNAL_SERVER_EXCEPTION);
     }
 
     public ErrorDetail getDetail() {
@@ -27,7 +27,7 @@ public class AppException extends Exception{
 
     public AppException(Throwable cause) {
         super(cause);
-        detail = new ErrorDetail(ExceptionCode.INTERNAL_SERVER_EXECPTION,ExceptionMessage.INTERNAL_SERVER_EXCEPTION);
+        detail = new ErrorDetail(ExceptionCode.INTERNAL_SERVER_EXCEPTION,ExceptionMessage.INTERNAL_SERVER_EXCEPTION);
     }
 
     @Override

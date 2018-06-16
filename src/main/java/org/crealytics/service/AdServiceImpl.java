@@ -68,7 +68,7 @@ public class AdServiceImpl implements AdService{
     }
 
     /**
-     * This mehtod is internal functionality and overloaded version of {@link #aggregatedReport(String, String)} which
+     * This method is internal functionality and overloaded version of {@link #aggregatedReport(String, String)} which
      * works once month and site feasible values are obtained
      * @param month ordinal
      * @param site site type (optional)
@@ -81,8 +81,9 @@ public class AdServiceImpl implements AdService{
         if(ads.isEmpty())
             throw new AppException(ExceptionCode.NO_RECORD_FOUND,ExceptionMessage.NO_RECORD_FOUND);
 
+        String m = Month.of(month).toString();
         AdDetailReport detailReport = new AdDetailReport()
-                .setMonth(Month.of(month).toString())
+                .setMonth(m.substring(0,1)+m.substring(1).toLowerCase())
                 .setSite(site)
                 .setRequests(ads.stream().mapToLong(AdDetail::getRequests).sum())
                 .setImpressions(ads.stream().mapToLong(AdDetail::getImpressions).sum())
