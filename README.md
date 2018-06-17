@@ -4,7 +4,7 @@ Advert Report is a web services for reporting on Ad categories. It provide repor
 
 
 > ###### [Java Documentation](https://manojsingh3889.github.io/JavaDocs/AdvertReport-docs/)
-> ###### [Test reports](https://manojsingh3889.github.io/JavaDocs/AdvertReport-test/)
+> ###### [Test reports](https://manojsingh3889.github.io/JavaDocs/AdvertReport-test/site/surefire-report.html)
 
 >## Technology stack
 - `Java 8` 
