@@ -68,14 +68,22 @@ Option can be any spring level or java level command line VM argument, some exam
 
 - **Mandatory API**
 	1. Month-Site wise report `GET http://localhost:8080/reports?month=<month>&site=<site>`
-  
 - **Bonus API**
 	1. Month wise aggregated report `GET http://localhost:8080/reports?month=<month>`
-	
-
-- **Extra API - List version of above APIs**
+- **Extra APIs - List version of above APIs**
 	1. Month-Site wise report into list `GET http://localhost:8080/reports/list?month=<month>&site=<site>`
 	2. Month wise aggregated report into list `GET http://localhost:8080/reports/list?month=<month>`
+
+ **Request parameter detail**
+
+1. **month** - This parameter is mandatory and can be passed in 3 forms
+	- **Ordinal** : 1,2,3 ... e.g. month=1 means month is January. Constrain[1-12] 
+	- **Short Name** : Jan, Feb... e.g. month=jan means month is January. constrain[Jan - Dec] and case insensitive
+	- **Full Name** : January, February... December. Constrain[January - December] and case insensitive
+2. **site** - This parameter is to mention the site type. [Optional, its absence converts API into aggregate API]. Constrain[ **desktop_web, mobile_web, android or iOS**] and case insensitive
+	
+
+
 		 
 
 ># Requirement
