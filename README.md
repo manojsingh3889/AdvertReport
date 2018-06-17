@@ -1,10 +1,74 @@
-# AdvertiseCore
+# Advert Report
 
-AdvertReport is a webservices for reporting on Ad categories.<a href="https://manojsingh3889.github.io/JavaDocs/AdvertReport-docs/">Javadocs</a>
+Advert Report is a web services for reporting on Ad categories. It provide reports generated from static csv data by.
 
->## Requirement
 
-To create a RESTful web service that can offer reporting advertising data, part of which
+> ###### [Java Documentation](https://manojsingh3889.github.io/JavaDocs/AdvertReport-docs/)
+
+>## Technology stack
+- `Java 8` 
+- `Maven` 
+- `Spring-boot`  
+- `Spring-rest` 
+- `Spring-data-jpa`
+- `Hibernate-JPA-annotations`
+- `h2-database`
+- `Spring-boot-test` 
+- `Spring-boot-Log4j`
+- `Junit`
+- `Mockito`
+
+>## Instructions
+
+**Note :** If your system doesn't have maven installed then you can use **./mvnw**(Linux) or **./mvnw.cmd**(windows) as a replacement for **mvn** for e.g. ***mvn clean install*** can be written as ***./mvnw clean install*** or ***./mvnw.cmd clean install*** . Only per-requite in this case is that your system should contain **java 8** installed and has **$JAVA_HOME** variable pointing to java home directory.
+
+#### Build
+1. Go to home directory,  run **mvn clean install**
+2. find artifact in target
+	1.  ***target/AdvertReport-1.0-SNAPSHOT.war*** standalone version which can be run without any server
+	2.  ***target/AdvertReport-1.0-SNAPSHOT.war*** standalone version which can be run without any server
+
+#### Testing
+Although test case get executed in build as well,But this step is recommended if you want to get run only test.
+Contains more than 70 test cases.
+
+1. Go to home directory,  run any one mentioned below:
+	1. **mvn test** (fast but no consolidate report rather you can find individuals reports in target/surefire-reports )
+	2. **mvn test surefire-report:report-only** (Fast but generates basic HTML in target/site/surefire-report.html)
+	2. **mvn test site** (Slowest but generates advance HTML in target/site/surefire-report.html)
+2. find test report target folder accordingly.
+
+#### Run
+
+There are several way to execute the artifact:
+
+	
+
+1. Run using maven spring-boot plugin ` mvn spring-boot:run [Options]` For e.g.
+	- `mvn spring-boot:run -Dserver.port=8580` (**Recommended**)
+	- `mvn spring-boot:run`
+	- `mvn spring-boot:run -Dlogging.level.root=DEBUG -Dserver.port=8580 `
+2. Run war file directly using `java -jar [options] target/AdvertReport-1.0-SNAPSHOT.war`. e.g.
+	- `java -jar -Dserver.port=8580 AdvertReport-1.0-SNAPSHOT.war` (**Recommended**)
+	- `java -jar AdvertReport-1.0-SNAPSHOT.war`
+	- `java -jar -Dlogging.level.root=DEBUG -Dserver.port=8580 AdvertReport-1.0-SNAPSHOT.war`
+3. Drop file in application server such as Jboss or tomcat.
+
+		
+		
+
+**Options**
+
+Option can be any spring level or java level command line VM argument, some example are
+			
+1. `-Dlogging.level.root=DEBUG` to provide more verbose logs
+2. `-Dserver.port=8580` (**recommended**), otherwise application will take random port. 
+	    
+
+
+># Requirement
+
+To create a Restful web service that can offer reporting advertising data, part of which
 is extracted from a csv file and the rest being calculated as additional metrics.
 
 >#### Scope

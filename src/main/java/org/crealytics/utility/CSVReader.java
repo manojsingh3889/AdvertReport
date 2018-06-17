@@ -1,5 +1,8 @@
 package org.crealytics.utility;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -18,6 +21,7 @@ import java.util.stream.Collectors;
  * @author manoj
  */
 public class CSVReader {
+    private static final Logger LOGGER = LoggerFactory.getLogger(CSVReader.class);
 
     private static final String SEPARATOR = "\\s*,\\s*";
     private static final String COMMA = ",";
@@ -47,6 +51,7 @@ public class CSVReader {
      * @throws UncheckedIOException for IO ambiguity within lambda
      */
     public static List<List<String>> getRecords(Path path){
+        LOGGER.info(String.format("Converting csv records at path[%s] into string matrix",path.getFileName()));
         try(Reader reader = Files.newBufferedReader(path, Charset.forName(ENCODING));
             BufferedReader br = new BufferedReader(reader)){
             return br.lines()
@@ -82,6 +87,7 @@ public class CSVReader {
      * @throws UncheckedIOException for IO ambiguity within lambda
      */
     public static List<String> getHeaders(Path path){
+        LOGGER.info(String.format("Converting all csv records at path[%s] into string array",path.getFileName()));
         try(Reader reader = Files.newBufferedReader(path, Charset.forName(ENCODING));
             BufferedReader br = new BufferedReader(reader)){
             return br.lines().findFirst()

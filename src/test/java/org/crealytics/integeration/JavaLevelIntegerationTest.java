@@ -29,14 +29,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 
+import static org.crealytics.utility.GlobalUtils.precise;
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = BootStrap.class)
-@AutoConfigureMockMvc
-@TestPropertySource(
-        locations = "classpath:application-integrationtest.properties")
-public class JavaLevelIntegeration {
+public class JavaLevelIntegerationTest {
 
     @Autowired
     FrontController controller;
@@ -77,14 +75,12 @@ public class JavaLevelIntegeration {
     @Test
     public void reports() {
         try {
-            AdDetail adDetail = new AdDetail("desktop web",12483775l,11866157l,
-                    30965l,7608l,23555.46f,1);
-            AdDetailReport detailReport = new AdDetailReport(adDetail);
-            ResponseEntity<AdDetailReport> report = controller.reports("1","desktop_web");
-            assertEquals(report.getBody().getClicks(),detailReport.getClicks());
-            assertEquals(report.getBody().getImpressions(),detailReport.getImpressions());
-            assertEquals(report.getBody().getCr(),detailReport.getCr());
-            assertEquals(report.getBody().getCtr(),detailReport.getCtr());
+            ResponseEntity<AdDetailReport> responseEntity = controller.reports("1","desktop_web");
+            AdDetailReport report = responseEntity.getBody();
+            assertEquals(report.getCtr(),new Float(precise(((float)report.getClicks()/report.getImpressions())*100)));
+            assertEquals(report.getCr(),new Float(precise(((float)report.getConversions()/report.getImpressions())*100)));
+            assertEquals(report.getFillRate(),new Float(precise(((float)report.getImpressions()/report.getRequests())*100)));
+            assertEquals(report.getEcpm(),new Float(precise(((float)report.getRevenue()*1000)/report.getImpressions())));
         } catch (AppException e) {
             Assertions.fail(e.getMessage());
         }

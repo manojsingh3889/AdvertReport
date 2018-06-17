@@ -3,7 +3,10 @@ package org.crealytics.startup;
 import org.crealytics.bean.AdDetail;
 import org.crealytics.service.AdService;
 import org.crealytics.utility.CSVReader;
+import org.crealytics.utility.GlobalUtils;
 import org.crealytics.utility.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
@@ -22,7 +25,7 @@ import java.util.List;
  */
 @Component
 public class ParseData implements ApplicationRunner {
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(ParseData.class);
     @Autowired
     AdService adService;
 
@@ -39,6 +42,8 @@ public class ParseData implements ApplicationRunner {
      */
     @Override
     public void run(ApplicationArguments args) throws Exception {
+        LOGGER.info("Loading csv into Database after paring");
+
         try {
             List<AdDetail> adDetails = getRecordFromDirectory(Paths.get(dirPath));
             insertInDatabase(adDetails);

@@ -22,4 +22,10 @@ public class PointCutRepository {
      */
     @Pointcut("within(org.crealytics.service.*)")
     public void serviceLayer() {}
+
+    /**
+     * A join point is in the service layer if the method is defined
+     * if the method is defined in a type within the org.crealytics.service.*ServiceImpl
+     * package or any sub-package under that then {@link Aspect} using this {@link Pointcut} will run
+     */
 }
