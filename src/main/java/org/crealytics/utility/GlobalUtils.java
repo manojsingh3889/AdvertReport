@@ -3,8 +3,6 @@ package org.crealytics.utility;
 import org.crealytics.exception.AppException;
 import org.crealytics.exception.ExceptionCode;
 import org.crealytics.exception.ExceptionMessage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.beans.PropertyEditor;
 import java.beans.PropertyEditorManager;
@@ -97,7 +95,7 @@ public class GlobalUtils {
      */
     public static String getSite(String site) throws AppException {
         try {
-            return SITE.valueOf(site).getName();
+            return SITE.valueOf(site.toLowerCase()).getName();
         } catch (IllegalArgumentException e) {
             throw new AppException(ExceptionCode.INVALID_SITE,ExceptionMessage.INVALID_SITE);
         }
@@ -116,7 +114,7 @@ public class GlobalUtils {
         desktop_web( "desktop web"),
         mobile_web( "mobile web"),
         android( "android"),
-        iOS( "iOS");
+        ios( "iOS");
 
         private String name;
 

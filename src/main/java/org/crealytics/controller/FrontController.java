@@ -43,7 +43,7 @@ public class FrontController {
      * @return Addetail response
      * @throws AppException Bad_request or internal error. This error are caught and comprehensively sent by {@link RestExceptionHandler}
      */
-    @RequestMapping(value = "/report", method = RequestMethod.GET)
+    @RequestMapping(value = "/reports", method = RequestMethod.GET)
     public ResponseEntity<AdDetailReport> reports(@RequestParam(value = "month") String month,
                                                   @RequestParam(value = "site", required = false) String site) throws AppException {
         if(month == null)
@@ -69,7 +69,7 @@ public class FrontController {
      * @return list AdDetils
      * @throws AppException Bad_request or internal error. This error are caught and comprehensively sent by {@link RestExceptionHandler}
      */
-    @RequestMapping(value = "/report/list", method = RequestMethod.GET)
+    @RequestMapping(value = "/reports/list", method = RequestMethod.GET)
     public ResponseEntity<List<AdDetailReport>> reportsAsList(@RequestParam(value = "month") String month,
                                                               @RequestParam(value = "site", required = false) String site) throws AppException {
         if(month == null)

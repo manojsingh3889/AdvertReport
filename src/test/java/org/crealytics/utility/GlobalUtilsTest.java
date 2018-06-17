@@ -6,12 +6,8 @@ import org.crealytics.exception.ExceptionCode;
 import org.crealytics.exception.ExceptionMessage;
 import org.junit.Test;
 
-import static org.crealytics.utility.GlobalUtils.parseValue;
-import static org.crealytics.utility.GlobalUtils.getMonth;
-import static org.crealytics.utility.GlobalUtils.getSite;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
+import static org.crealytics.utility.GlobalUtils.*;
+import static org.junit.Assert.*;
 
 public class GlobalUtilsTest {
 

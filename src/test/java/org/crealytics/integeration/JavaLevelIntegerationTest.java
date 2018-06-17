@@ -8,29 +8,18 @@ import org.crealytics.controller.FrontController;
 import org.crealytics.exception.AppException;
 import org.crealytics.exception.ExceptionCode;
 import org.crealytics.exception.ExceptionMessage;
-import org.crealytics.service.AdService;
-import org.crealytics.service.AdServiceImpl;
-import org.hamcrest.Matchers;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
 
 import static org.crealytics.utility.GlobalUtils.precise;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = BootStrap.class)

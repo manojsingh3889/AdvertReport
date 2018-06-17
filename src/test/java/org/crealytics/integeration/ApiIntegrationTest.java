@@ -4,7 +4,6 @@ import org.crealytics.BootStrap;
 import org.crealytics.repository.AdRepository;
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
-import org.junit.experimental.results.ResultMatchers;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -26,7 +25,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         locations = "classpath:application-integrationtest.properties")
 
 public class ApiIntegrationTest {
-
+private static final String REPORTS_API = "/api/reports";
+    private static final String REPORTS_LIST_API = "/api/reports/list";
     @Autowired
     private MockMvc mvc;
 
@@ -36,7 +36,7 @@ public class ApiIntegrationTest {
     //positive cases
     @Test
     public void test_report_api_month_site() throws Exception {
-        mvc.perform(get("/api/report?month=1&site=desktop_web"))
+        mvc.perform(get(REPORTS_API+"?month=1&site=desktop_web"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.month",CoreMatchers.is("January")))
@@ -45,7 +45,7 @@ public class ApiIntegrationTest {
 
     @Test
     public void test_report_list_api_month_site() throws Exception {
-        mvc.perform(get("/api/report/list?month=1&site=desktop_web"))
+        mvc.perform(get(REPORTS_LIST_API+"?month=1&site=desktop_web"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$[0].month",CoreMatchers.is("January")))
@@ -56,7 +56,7 @@ public class ApiIntegrationTest {
     //positive case - to show how api are capable of handling 3 formats of month case insensitively
     @Test
     public void test_report_api_short_month_site() throws Exception {
-        mvc.perform(get("/api/report?month=JAN&site=desktop_web"))
+        mvc.perform(get(REPORTS_API+"?month=JAN&site=desktop_web"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.month",CoreMatchers.is("January")))
@@ -65,7 +65,7 @@ public class ApiIntegrationTest {
 
     @Test
     public void test_report_list_api_short_month_site() throws Exception {
-        mvc.perform(get("/api/report/list?month=Jan&site=desktop_web"))
+        mvc.perform(get(REPORTS_LIST_API+"?month=Jan&site=desktop_web"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$[0].month",CoreMatchers.is("January")))
@@ -76,7 +76,7 @@ public class ApiIntegrationTest {
 
     @Test
     public void test_report_api_full_month_site() throws Exception {
-        mvc.perform(get("/api/report?month=January&site=desktop_web"))
+        mvc.perform(get(REPORTS_API+"?month=January&site=desktop_web"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.month",CoreMatchers.is("January")))
@@ -85,7 +85,7 @@ public class ApiIntegrationTest {
 
     @Test
     public void test_report_list_api_full_month_site() throws Exception {
-        mvc.perform(get("/api/report/list?month=january&site=desktop_web"))
+        mvc.perform(get(REPORTS_LIST_API+"?month=january&site=desktop_web"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$[0].month",CoreMatchers.is("January")))
@@ -97,7 +97,7 @@ public class ApiIntegrationTest {
     //positive test case - to show how missing site turns api into month aggregator type
     @Test
     public void test_report_api_month() throws Exception {
-        mvc.perform(get("/api/report?month=2"))
+        mvc.perform(get(REPORTS_API+"?month=2"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.month",CoreMatchers.is("February")))
@@ -106,7 +106,7 @@ public class ApiIntegrationTest {
 
     @Test
     public void test_report_list_api_month() throws Exception {
-        mvc.perform(get("/api/report/list?month=2"))
+        mvc.perform(get(REPORTS_LIST_API+"?month=2"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$[2].month", CoreMatchers.is("February")))
@@ -118,7 +118,7 @@ public class ApiIntegrationTest {
     //negative case - missing month
     @Test
     public void test_report_api_missing_month_only_site() throws Exception {
-        mvc.perform(get("/api/report?month=&site=desktop_web"))
+        mvc.perform(get(REPORTS_API+"?month=&site=desktop_web"))
                 .andExpect(status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.errorcode",CoreMatchers.is(411)))
@@ -127,7 +127,7 @@ public class ApiIntegrationTest {
 
     @Test
     public void test_report_list_api_missing_month_only_site() throws Exception {
-        mvc.perform(get("/api/report/list?month=&site=desktop_web"))
+        mvc.perform(get(REPORTS_LIST_API+"?month=&site=desktop_web"))
                 .andExpect(status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.errorcode",CoreMatchers.is(411)))
@@ -137,7 +137,7 @@ public class ApiIntegrationTest {
 
     @Test
     public void test_report_api_missing_month() throws Exception {
-        mvc.perform(get("/api/report?month="))
+        mvc.perform(get(REPORTS_API+"?month="))
                 .andExpect(status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.errorcode",CoreMatchers.is(411)))
@@ -146,7 +146,7 @@ public class ApiIntegrationTest {
 
     @Test
     public void test_report_list_api_missing_month() throws Exception {
-        mvc.perform(get("/api/report/list?month="))
+        mvc.perform(get(REPORTS_LIST_API+"?month="))
                 .andExpect(status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.errorcode",CoreMatchers.is(411)))
@@ -156,7 +156,7 @@ public class ApiIntegrationTest {
     //negative case - invalid month type
     @Test
     public void test_report_api_month_invalid_ordinal() throws Exception {
-        mvc.perform(get("/api/report?month=13"))
+        mvc.perform(get(REPORTS_API+"?month=13"))
                 .andExpect(status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.errorcode",CoreMatchers.is(411)))
@@ -165,7 +165,7 @@ public class ApiIntegrationTest {
 
     @Test
     public void test_report_list_api_month_invalid_ordinal() throws Exception {
-        mvc.perform(get("/api/report/list?month=13"))
+        mvc.perform(get(REPORTS_LIST_API+"?month=13"))
                 .andExpect(status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.errorcode",CoreMatchers.is(411)))
@@ -174,7 +174,7 @@ public class ApiIntegrationTest {
 
     @Test
     public void test_report_api_month_invalid_short_name() throws Exception {
-        mvc.perform(get("/api/report?month=Jax"))
+        mvc.perform(get(REPORTS_API+"?month=Jax"))
                 .andExpect(status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.errorcode",CoreMatchers.is(411)))
@@ -183,7 +183,7 @@ public class ApiIntegrationTest {
 
     @Test
     public void test_report_list_api_month_invalid_short_name() throws Exception {
-        mvc.perform(get("/api/report/list?month=Jax"))
+        mvc.perform(get(REPORTS_LIST_API+"?month=Jax"))
                 .andExpect(status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.errorcode",CoreMatchers.is(411)))
@@ -192,7 +192,7 @@ public class ApiIntegrationTest {
 
     @Test
     public void test_report_api_month_invalid_full_name() throws Exception {
-        mvc.perform(get("/api/report?month=octobar"))
+        mvc.perform(get(REPORTS_API+"?month=octobar"))
                 .andExpect(status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.errorcode",CoreMatchers.is(411)))
@@ -201,7 +201,7 @@ public class ApiIntegrationTest {
 
     @Test
     public void test_report_list_api_month_invalid_full_name() throws Exception {
-        mvc.perform(get("/api/report/list?month=sptember"))
+        mvc.perform(get(REPORTS_LIST_API+"?month=sptember"))
                 .andExpect(status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.errorcode",CoreMatchers.is(411)))
@@ -211,7 +211,7 @@ public class ApiIntegrationTest {
     //negative case - invalid site type
     @Test
     public void test_report_api_month_invalid_site() throws Exception {
-        mvc.perform(get("/api/report?month=feb&site=mobile_app"))
+        mvc.perform(get(REPORTS_API+"?month=feb&site=mobile_app"))
                 .andExpect(status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.errorcode",CoreMatchers.is(412)))
@@ -220,7 +220,7 @@ public class ApiIntegrationTest {
 
     @Test
     public void test_report_list_api_month_invalid_site() throws Exception {
-        mvc.perform(get("/api/report/list?month=1&site=desktop_site"))
+        mvc.perform(get(REPORTS_LIST_API+"?month=1&site=desktop_site"))
                 .andExpect(status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.errorcode", CoreMatchers.is(412)))

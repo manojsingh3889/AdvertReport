@@ -33,9 +33,9 @@ Although test case get executed in build as well,But this step is recommended if
 Contains more than 70 test cases.
 
 1. Go to home directory,  run any one mentioned below:
-	1. **mvn test** (fast but no consolidate report rather you can find individuals reports in target/surefire-reports )
-	2. **mvn test surefire-report:report-only** (Fast but generates basic HTML in target/site/surefire-report.html)
-	2. **mvn test site** (Slowest but generates advance HTML in target/site/surefire-report.html)
+	1. `mvn test` (fast but no consolidate report rather you can find individuals reports in target/surefire-reports )
+	2. `mvn test surefire-report:report-only` (Fast but generates basic HTML in target/site/surefire-report.html)
+	2. `mvn test site` (Slowest but generates advance HTML in target/site/surefire-report.html)
 2. find test report target folder accordingly.
 
 #### Run
@@ -64,7 +64,19 @@ Option can be any spring level or java level command line VM argument, some exam
 1. `-Dlogging.level.root=DEBUG` to provide more verbose logs
 2. `-Dserver.port=8580` (**recommended**), otherwise application will take random port. 
 	    
+#### RestApi
 
+- **Mandatory API**
+	1. Month-Site wise report `GET http://localhost:8080/reports?month=<month>&site=<site>`
+  
+- **Bonus API**
+	1. Month wise aggregated report `GET http://localhost:8080/reports?month=<month>`
+	
+
+- **Extra API - List version of above APIs**
+	1. Month-Site wise report into list `GET http://localhost:8080/reports/list?month=<month>&site=<site>`
+	2. Month wise aggregated report into list `GET http://localhost:8080/reports/list?month=<month>`
+		 
 
 ># Requirement
 
