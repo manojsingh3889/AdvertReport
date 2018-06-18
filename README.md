@@ -4,6 +4,7 @@ Advert Report is a web services for reporting on Ad categories. It provide repor
 
 
 > ###### [Java Documentation](https://manojsingh3889.github.io/JavaDocs/AdvertReport-docs/)
+
 > ###### [Test reports](https://manojsingh3889.github.io/JavaDocs/AdvertReport-test/site/surefire-report.html)
 
 >## Technology stack
@@ -24,76 +25,76 @@ Advert Report is a web services for reporting on Ad categories. It provide repor
 **Note :** If your system doesn't have maven installed then you can use **./mvnw**(Linux) or **./mvnw.cmd**(windows) as a replacement for **mvn** for e.g. ***mvn clean install*** can be written as ***./mvnw clean install*** or ***./mvnw.cmd clean install*** . Only per-requite in this case is that your system should contain **java 8** installed and has **$JAVA_HOME** variable pointing to java home directory.
 
 #### Build
-1. Go to home directory,  run **mvn clean install**
-2. find artifact in target
-	1.  ***target/AdvertReport-1.0-SNAPSHOT.war*** standalone version which can be run without any server
-	2.  ***target/AdvertReport-1.0-SNAPSHOT.war*** standalone version which can be run without any server
+1. Go to the home directory,  run **mvn clean install**
+2. find the artifact in target
+    1.  ***target/AdvertReport-1.0-SNAPSHOT.war*** standalone version which can be run with or without an application server
+
 
 #### Testing
-Although test case get executed in build as well,But this step is recommended if you want to get run only test.
+Although test case gets executed in build as well, this step is recommended if you want to get run the only test.
 Contains more than 70 test cases.
 
-1. Go to home directory,  run any one mentioned below:
-	1. `mvn test` (fast but no consolidate report rather you can find individuals reports in target/surefire-reports )
-	2. `mvn test surefire-report:report-only` (Fast but generates basic HTML in target/site/surefire-report.html)
-	2. `mvn test site` (Slowest but generates advance HTML in target/site/surefire-report.html)
+1. Go to the home directory,  run anyone mentioned below:
+    1. `mvn test` (fast but no consolidate report rather you can find individuals reports in target/surefire-reports )
+    2. `mvn test surefire-report:report-only` (Fast but generates basic HTML in target/site/surefire-report.html)
+    2. `mvn test site` (Slowest but generates advance HTML in target/site/surefire-report.html)
 2. find test report target folder accordingly.
 
 #### Run
 
-There are several way to execute the artifact:
+There are several ways to execute the artifact:
 
-	
+    
 
 1. Run using maven spring-boot plugin ` mvn spring-boot:run [Options]` For e.g.
-	- `mvn spring-boot:run -Dserver.port=8580` (**Recommended**)
-	- `mvn spring-boot:run`
-	- `mvn spring-boot:run -Dlogging.level.root=DEBUG -Dserver.port=8580 `
+    - `mvn spring-boot:run -Dserver.port=8580` (**Recommended**)
+    - `mvn spring-boot:run`
+    - `mvn spring-boot:run -Dlogging.level.root=DEBUG -Dserver.port=8580 `
 2. Run war file directly using `java -jar [options] target/AdvertReport-1.0-SNAPSHOT.war`. e.g.
-	- `java -jar -Dserver.port=8580 AdvertReport-1.0-SNAPSHOT.war` (**Recommended**)
-	- `java -jar AdvertReport-1.0-SNAPSHOT.war`
-	- `java -jar -Dlogging.level.root=DEBUG -Dserver.port=8580 AdvertReport-1.0-SNAPSHOT.war`
+    - `java -jar -Dserver.port=8580 AdvertReport-1.0-SNAPSHOT.war` (**Recommended**)
+    - `java -jar AdvertReport-1.0-SNAPSHOT.war`
+    - `java -jar -Dlogging.level.root=DEBUG -Dserver.port=8580 AdvertReport-1.0-SNAPSHOT.war`
 3. Drop file in application server such as Jboss or tomcat.
 
-		
-		
+        
+        
 
 **Options**
 
-Option can be any spring level or java level command line VM argument, some example are
-			
+An option can be any spring level or java level command line VM argument, some example are
+            
 1. `-Dlogging.level.root=DEBUG` to provide more verbose logs
-2. `-Dserver.port=8580` (**recommended**), otherwise application will take random port. 
-	    
+2. `-Dserver.port=8580` (**recommended**), otherwise the application will take the random port. 
+        
 #### RestApi
 
 - **Mandatory API**
-	1. Month-Site wise report `GET http://localhost:8080/reports?month=<month>&site=<site>`
+    1. Month-Site wise report `GET http://localhost:8080/reports?month=<month>&site=<site>`
 - **Bonus API**
-	1. Month wise aggregated report `GET http://localhost:8080/reports?month=<month>`
+    1. Month-wise aggregated report `GET http://localhost:8080/reports?month=<month>`
 - **Extra APIs - List version of above APIs**
-	1. Month-Site wise report into list `GET http://localhost:8080/reports/list?month=<month>&site=<site>`
-	2. Month wise aggregated report into list `GET http://localhost:8080/reports/list?month=<month>`
+    1. Month-Site wise report into list `GET http://localhost:8080/reports/list?month=<month>&site=<site>`
+    2. Month wise aggregated report into list `GET http://localhost:8080/reports/list?month=<month>`
 
  **Request parameter detail**
 
 1. **month** - This parameter is mandatory and can be passed in 3 forms
-	- **Ordinal** : 1,2,3 ... e.g. month=1 means month is January. Constrain[1-12] 
-	- **Short Name** : Jan, Feb... e.g. month=jan means month is January. constrain[Jan - Dec] and case insensitive
-	- **Full Name** : January, February... December. Constrain[January - December] and case insensitive
+    - **Ordinal** : 1,2,3 ... e.g. month=1 means month is January. Constrain[1-12] 
+    - **Short Name** : Jan, Feb... e.g. month=jan means month is January. constrain[Jan - Dec] and case insensitive
+    - **Full Name** : January, February... December. Constrain[January - December] and case insensitive
 2. **site** - This parameter is to mention the site type. [Optional, its absence converts API into aggregate API]. Constrain[ **desktop_web, mobile_web, android or iOS**] and case insensitive
-	
+    
 
 
-		 
+         
 
 ># Requirement
 
-To create a Restful web service that can offer reporting advertising data, part of which
+To create a Restful web service that can offer to report advertising data, part of which
 is extracted from a csv file and the rest being calculated as additional metrics.
 
 >#### Scope
-- Implement only the backend and leave the creation of a colourful and flashy frontend over to the frontend developers.
+- Implement only the backend and leave the creation of a colorful and flashy frontend over to the frontend developers.
 - Your web service should use Java SDK 8+, Spring and Maven since we use them heavily.
   You can alternatively use Gradle instead of Maven if you feel more comfortable.
 - Since we put quite some emphasis on __tests__, we would also like to see how you verify the functionality
@@ -121,7 +122,7 @@ They are largely extracted from [Appnexus wiki](https://wiki.appnexus.com/displa
 - **Revenue**: The amount of money a publisher earns from ads showing.
 - **Conversion**: When a user makes a purchase, or performs some other desired action in response to an ad.
 - **CPC**: Cost per click. A payment model in which advertisers pay each time a user clicks on their advertisement.
-- **CPM**: Cost per mille or thousand (mille = thousand in Latin). A pricing model in which advertisers pay
+- **CPM**: Cost per mille or thousand (Mille = thousand in Latin). A pricing model in which advertisers pay
   for every 1000 impressions of their advertisement served. This is the standard basic pricing model for online advertising.
 - **CTR (%)**: Click-through rate.  Expressed as a percentage. Literally, the ratio of users who click on a specific
   link to the number of total users who view an advertisement.
@@ -141,15 +142,14 @@ They are largely extracted from [Appnexus wiki](https://wiki.appnexus.com/displa
   **ecpm = (revenue × 1000) ÷ impressions**
 
 >#### Task Description
-In the root folder you will find two csv files which contain publisher advertising reporting data for the months of
+In the root folder, you will find two csv files which contain publisher advertising reporting data for the months of
 January [2018_01_report.csv](2018_01_report.csv) and February [2018_02_report.csv](2018_02_report.csv).
-Specifically, it lists the 4 available sites of the publisher (desktop and mobile web plus android and iOS apps)
+Specifically, it lists the 4 available sites of the publisher (desktop and mobile web plus Android and iOS apps)
 broken down into five dimensions (requests, impressions, clicks, conversions and revenue (USD)).
 
 Your task is to
-1. Parse the file and store it in-memory.
-   Kudos and additional points earned for using JPA together with any kind of underlying database technology
-   for data persistence (mysql, derby, H2, HSQLDB etc).
+1. Parse the file and store it in memory.
+   Kudos and additional points earned for using JPA together with any kind of underlying database technology for data persistence (mysql, derby, H2, HSQLDB etc).
 2. Calculate the following additional metrics (as explained above) and also store them along with the parsed data
    from the CSV file:
    * CTR
@@ -269,3 +269,4 @@ Your task is to
  The above examples are just for guidance, feel free to follow them but don't hesitate to come up with your own approach.
 
  Good luck!
+
